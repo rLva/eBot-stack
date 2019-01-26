@@ -30,7 +30,9 @@ services:
       NODE_STARTUP_METHOD: 'node'
       USE_DELAY_END_RECORD: 'true'
       TOORNAMENT_PLUGIN_KEY: ''
-
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
 
   ebotweb:
@@ -60,6 +62,9 @@ services:
       TOORNAMENT_SECRET: ''
       TOORNAMENT_API_KEY: ''
       TOORNAMENT_PLUGIN_KEY: ''
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
       
   mysql:
