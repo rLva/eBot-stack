@@ -1,15 +1,9 @@
 version: '3.3'
 
-networks:
-  mynetwork:
-    driver: bridge
-
 services:
   ebot:
     image: hsfactory/ebot
     restart: always
-    networks:
-      - mynetwork
     links:
       - "mysql:mysql"
     ports:
@@ -44,8 +38,6 @@ services:
   ebotweb:
     image: hsfactory/ebotweb
     restart: always
-    networks:
-      - mynetwork
     links:
       - "mysql:mysql"
     ports:
@@ -78,8 +70,6 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
-    networks:
-      - mynetwork
     volumes:
       - /data/csgo/mysql:/var/lib/mysql
     ports:
