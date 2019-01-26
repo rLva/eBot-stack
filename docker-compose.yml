@@ -78,7 +78,7 @@ services:
       - MYSQL_ROOT_PASSWORD=MyAwesomePassword
       - MYSQL_ROOT_HOST=%
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
-  deploy:
-    placement:
+    deploy:
+      placement:
         constraints: [node.role == manager]
 
