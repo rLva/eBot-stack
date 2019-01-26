@@ -30,7 +30,9 @@ services:
       NODE_STARTUP_METHOD: 'node'
       USE_DELAY_END_RECORD: 'true'
       TOORNAMENT_PLUGIN_KEY: ''
-
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
   ebotweb:
     image: hsfactory/ebotweb
@@ -59,7 +61,9 @@ services:
       TOORNAMENT_SECRET: ''
       TOORNAMENT_API_KEY: ''
       TOORNAMENT_PLUGIN_KEY: ''
-
+    deploy:
+      placement:
+        constraints: [node.role == manager]
       
   mysql:
     image: mysql:5.7
@@ -79,5 +83,5 @@ services:
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
     deploy:
       placement:
-          constraints: [node.role == worker]
+        constraints: [node.role == manager]
 
