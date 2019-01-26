@@ -30,6 +30,7 @@ services:
       NODE_STARTUP_METHOD: 'node'
       USE_DELAY_END_RECORD: 'true'
       TOORNAMENT_PLUGIN_KEY: ''
+    network_mode: bridge
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -62,6 +63,7 @@ services:
       TOORNAMENT_SECRET: ''
       TOORNAMENT_API_KEY: ''
       TOORNAMENT_PLUGIN_KEY: ''
+    network_mode: bridge
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -83,10 +85,8 @@ services:
       - MYSQL_ROOT_PASSWORD=MyAwesomePassword
       - MYSQL_ROOT_HOST=%
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
+    network_mode: bridge
     deploy:
       placement:
         constraints: [node.role == manager]
 
-networks:
-  default:
-    driver: bridge 
