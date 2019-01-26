@@ -1,9 +1,15 @@
 version: '3.3'
 
+networks:
+  mynetwork:
+    driver: bridge
+
 services:
   ebot:
     image: hsfactory/ebot
     restart: always
+    networks:
+      - mynetwork
     links:
       - "mysql:mysql"
     ports:
@@ -30,7 +36,6 @@ services:
       NODE_STARTUP_METHOD: 'node'
       USE_DELAY_END_RECORD: 'true'
       TOORNAMENT_PLUGIN_KEY: ''
-    network_mode: bridge
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -39,6 +44,8 @@ services:
   ebotweb:
     image: hsfactory/ebotweb
     restart: always
+    networks:
+      - mynetwork
     links:
       - "mysql:mysql"
     ports:
@@ -63,7 +70,6 @@ services:
       TOORNAMENT_SECRET: ''
       TOORNAMENT_API_KEY: ''
       TOORNAMENT_PLUGIN_KEY: ''
-    network_mode: bridge
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -72,6 +78,8 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
+    networks:
+      - mynetwork
     volumes:
       - /data/csgo/mysql:/var/lib/mysql
     ports:
@@ -85,7 +93,6 @@ services:
       - MYSQL_ROOT_PASSWORD=MyAwesomePassword
       - MYSQL_ROOT_HOST=%
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
-    network_mode: bridge
     deploy:
       placement:
         constraints: [node.role == manager]
